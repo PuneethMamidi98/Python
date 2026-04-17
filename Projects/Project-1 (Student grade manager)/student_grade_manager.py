@@ -1,6 +1,17 @@
 # Student grade manager
 students_list = []
 
+try:
+    with open("students.txt","r") as file:
+        for line in file:
+            parts = line.strip().split(",")
+            students_list.append({
+                "name" : parts[0],
+                "grade" : int(parts[1])
+            })
+except FileNotFoundError:
+    pass            
+
 isBrowersing = True
 while isBrowersing :
     # Welcome 
@@ -22,10 +33,12 @@ while isBrowersing :
         students["name"] = student_name
         students["grade"] = student_grade
         students_list.append(students)
+        with open("students.txt","a") as file:
+            file.write(f"{student_name},{student_grade}\n")
         print("Student added sucessfully")
     elif option == 2:
         total = 0
-        if len(student_list) == 0:
+        if len(students_list) == 0:
             print("No students added yet!")
         else:
             for student in students_list:
