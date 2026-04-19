@@ -23,25 +23,32 @@ def divide(numberOne,numberTwo):
 
 
 # User Input - two numbers and operator
-numberOne = int(input("Enter the first number: "))
-numberTwo = int(input("Enter the second number: "))
-operator = input("Enter the operator: ")
+while True:
+    try:
+        numberOne = int(input("Enter the first number: "))
+        numberTwo = int(input("Enter the second number: "))
+        operator = input("Enter the operator: ")
+        if operator == "":
+            print("Please enter the operator")
+        else:
+            # call the appropriate function based on the operator.
+            if operator == "+":
+                print(f"{numberOne} {operator} {numberTwo} = {add(numberOne,numberTwo)}")
+            elif operator == "-":
+                print(f"{numberOne} {operator} {numberTwo} = {subtract(numberOne,numberTwo)}")
+            elif operator == "*":
+                print(f"{numberOne} x {numberTwo} = {multiply(numberOne,numberTwo)}")
+            elif operator == "/":
+                try:
+                    print(f"{numberOne} {operator} {numberTwo} = {divide(numberOne,numberTwo)}")
+                except ZeroDivisionError:
+                    print("Cannot divide by zero!")       
+            else:
+                print("Invalid operator")    
+    except ValueError:
+        print("Please enter valid number")    
 
-# call the appropriate function based on the operator.
-
-if operator == "+":
-    print(f"{numberOne} {operator} {numberTwo} = {add(numberOne,numberTwo)}")
-elif operator == "-":
-    print(f"{numberOne} {operator} {numberTwo} = {subtract(numberOne,numberTwo)}")
-elif operator == "*":
-    print(f"{numberOne} x {numberTwo} = {multiply(numberOne,numberTwo)}")
-elif operator == "/":
-    if numberTwo == 0:
-        print("Cannot divide by zero")
-    else:    
-        print(f"{numberOne} {operator} {numberTwo} = {divide(numberOne,numberTwo)}")
-else:
-    print("Invalid operator")
+    
 
 
 
