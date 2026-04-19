@@ -23,19 +23,35 @@ while isBrowersing :
     print("2. View all students")
     print("3. Find top student")
     print("4. Exit")
-
-    option = int(input("Enter your option: "))
+    option = 0 # default value
+    try:
+        option = int(input("Enter your option: "))
+    except ValueError:
+        print("Please enter valid option!")    
 
     if option == 1:
-        student_name = input("Enter name: ")
-        student_grade = int(input("Enter grade: "))
-        students = {}
-        students["name"] = student_name
-        students["grade"] = student_grade
-        students_list.append(students)
-        with open("students.txt","a") as file:
-            file.write(f"{student_name},{student_grade}\n")
-        print("Student added sucessfully")
+        try:
+            student_name = input("Enter name: ")
+            if student_name == "":
+                print("Please enter name ")
+            else:        
+                student_grade = int(input("Enter grade: "))
+                if student_grade < 0 or student_grade > 100:
+                    print("Grade must be between 0 and 100")
+                else:
+                    students = {}
+                    students["name"] = student_name
+                    students["grade"] = student_grade
+                    students_list.append(students)
+                    with open("students.txt","a") as file:
+                        file.write(f"{student_name},{student_grade}\n")
+                    print("Student added successfully")    
+        except ValueError:
+            print("Please Enter valid grade")
+        except FileNotFoundError:
+            print("File Not found")  
+
+                 
     elif option == 2:
         total = 0
         if len(students_list) == 0:
