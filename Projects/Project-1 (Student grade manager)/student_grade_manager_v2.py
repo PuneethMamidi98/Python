@@ -1,0 +1,2 @@
+# Refactored version with funtions
+
